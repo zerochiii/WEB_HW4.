@@ -6,21 +6,26 @@
 
 <body>
 
+
+  <h1 id="pageTitle">檸檬月平均價格查詢平台</h1>
+  <div id="container">
   <form id="queryForm">
-    <label for="startYear">起始年份:</label>
+    <label for="startYear">起始年份：</label>
     <input type="number" id="startYear" name="startYear" required>
 
-    <label for="startMonth">起始月份:</label>
+    <label for="startMonth">起始月份：</label>
     <input type="number" id="startMonth" name="startMonth" min="1" max="12" required>
 
-    <label for="endYear">結束年份:</label>
+    <label for="endYear">結束年份：</label>
     <input type="number" id="endYear" name="endYear" required>
 
-    <label for="endMonth">結束月份:</label>
+    <label for="endMonth">結束月份：</label>
     <input type="number" id="endMonth" name="endMonth" min="1" max="12" required>
 
-    <button type="submit">查詢</button>
+    <button type="submit" style="background-color: #f7c948; color: #333; border: none; border-radius: 6px; padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#e0b62e'" onmouseout="this.style.backgroundColor='#f7c948'">查詢</button>
   </form>
+
+  <div id="errorMessage" style="color: red; text-align: center;"></div>
 
   <div id="result">
     <h2>查詢結果</h2>
@@ -37,6 +42,7 @@
 
     <canvas id="priceChart" width="400" height="200"></canvas>
   </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -47,6 +53,19 @@
       const startMonth = document.getElementById('startMonth').value;
       const endYear = document.getElementById('endYear').value;
       const endMonth = document.getElementById('endMonth').value;
+
+      // 檢查年份和月份是否在有效範圍內
+      const isValidRange = (year, month) => {
+        const startDate = new Date(2005, 0, 1); // 2005/1
+        const endDate = new Date(2025, 3, 30); // 2025/4
+        const inputDate = new Date(year, month - 1, 1);
+        return inputDate >= startDate && inputDate <= endDate;
+      };
+
+      if (!isValidRange(startYear, startMonth) || !isValidRange(endYear, endMonth)) {
+        window.location.href = '/error.html';
+        return;
+      }
 
       const response = await fetch('/query', {
         method: 'POST',

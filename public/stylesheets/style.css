@@ -1,8 +1,143 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fffbea;
+  color: #333;
 }
 
-a {
-  color: #00B7FF;
+/* 整體容器：左右版面 */
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* 調整查詢框位置，顯示在查詢結果的正上方 */
+#queryForm {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: auto;
+  max-width: none;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#queryForm label {
+  grid-column: span 2;
+  font-weight: bold;
+}
+
+#queryForm input {
+  grid-column: span 2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#queryForm button {
+  grid-column: span 2;
+  background-color: #f7c948;
+  color: #333;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#queryForm button:hover {
+  background-color: #e0b62e;
+}
+
+/* 增加查詢框內部元素之間的空格，並調整寬度 */
+#queryForm label,
+#queryForm input,
+#queryForm button {
+  margin-bottom: 10px;
+  width: 50%;
+  display: block;
+  margin: 10px auto;
+}
+
+/* 添加大標題樣式 */
+#queryForm h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 右側結果區 */
+#result {
+  flex: 2;
+  min-width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  border: 3px solid #f7c948;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+#result h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  border-bottom: 2px solid #f7c948;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+#resultTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+#resultTable th, #resultTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#resultTable th {
+  background-color: #fdf0bd;
+  color: #2c3e50;
+}
+
+#resultTable tr:nth-child(even) {
+  background-color: #fff9e5;
+}
+
+#priceChart {
+  margin-top: 30px;
+}
+
+/* 響應式排版 */
+@media (max-width: 900px) {
+  #container {
+    flex-direction: column;
+  }
+
+  #queryForm, #result {
+    width: 100%;
+  }
+}
+
+/* 頁面標題樣式 */
+#pageTitle {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
